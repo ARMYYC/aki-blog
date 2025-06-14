@@ -49,6 +49,58 @@
       font-size: 0.9rem;
       color: #aaa;
     }
+    .btn {
+      padding: 10px 25px;
+      font-size: 16px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-si {
+      background-color: #b74b9c;
+      color: white;
+    }
+    .btn-no {
+      background-color: #b74b9c;
+      color: white;
+    }
+    #mensaje {
+      margin-top: 20px;
+      color: red;
+      display: none;
+    }
+     /* Estilo para el modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #000;
+    }
   </style>
 </head>
 <body>
@@ -100,10 +152,61 @@
         Miedo a que le hagan pasar cosas malas otras personas, a que la lastimen, pero no puedo estar con ella,
         Quiero verla no sé si pueda aguantar más días sin poder hablarle</p>
     </div>
+
+    <div class="post">
+       <h2>¿Te puedo ver? &#129402</h2>
+        <button class="btn btn-si" onclick="enviarWhatsApp()">Sí</button>
+        <button id="btn_no" class="btn btn-no" onclick="mostrarModal(),deshabilitarBoton()">No</button>
+
+        
+
+         <!-- Modal -->
+        <div id="popup" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <p>❌ Opción no válida. Por favor, presiona <strong>"Sí"</strong> para continuar <strong>Te extraño de verdad &#128543</strong>.</p>
+          </div>
+        </div>
+    </div>
+
   </main>
 
   <footer>
     Creado con cariño por AC para AKID&#128151  </footer>
 
 </body>
+
+ <script>
+    
+    function enviarWhatsApp() {
+      const numero = "3334977232"; // <-- Reemplaza con tu número real (sin espacios, guiones ni +)
+      const mensaje = encodeURIComponent("Hola");
+      const url = `https://wa.me/${numero}?text=${mensaje}`;
+      window.open(url, "_blank");
+    }
+
+    function mostrarMensaje() {
+      document.getElementById("mensaje").style.display = "block";
+    }
+    
+    function mostrarModal() {
+      document.getElementById("popup").style.display = "block";
+    }
+
+    function cerrarModal() {
+      document.getElementById("popup").style.display = "none";
+    }
+    function deshabilitarBoton() {
+  document.getElementById("btn_no").disabled = true;
+  // Aquí puedes agregar la lógica adicional que necesitas ejecutar al hacer clic
+    }
+
+    // Cerrar modal si se hace clic fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById("popup");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 </html>
